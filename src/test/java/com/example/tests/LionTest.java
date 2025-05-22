@@ -31,12 +31,18 @@ public class LionTest {
         assertEquals(1, lion.getKittens());
     }
     @Test
-    public void getFoodTest() throws Exception{
+    public void getFoodListTest() throws Exception{
         List <String> meal = List.of("Животные", "Птицы", "Рыба");
         Mockito.when(feline.eatMeat()).thenReturn(meal);
         assertEquals(meal, lion.getFood());
-        Mockito.verify(feline, Mockito.times(1)).eatMeat();
 
+    }
+    @Test
+    public void getFoodTest() throws Exception {
+        List <String> meal = List.of("Животные", "Птицы", "Рыба");
+        Mockito.when(feline.eatMeat()).thenReturn(meal);
+        lion.getFood();
+        Mockito.verify(feline, Mockito.times(1)).eatMeat();
     }
     @Test(expected = Exception.class)
     public void invalidSexTest() throws Exception {
