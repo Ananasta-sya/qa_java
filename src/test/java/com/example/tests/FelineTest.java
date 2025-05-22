@@ -1,25 +1,28 @@
 package com.example.tests;
 
 import com.example.Feline;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.mockito.Spy;
-import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 
-@RunWith(MockitoJUnitRunner.class)
-public class FelineTest {
 
-    @Spy
+public class FelineTest {
     private Feline feline;
+
+    @Before
+    public void makeFeline() {
+        feline = new Feline();
+    }
+
 
     @Test
     public void eatMeatTest() throws Exception {
-        feline.eatMeat();
-        Mockito.verify(feline,Mockito.times(1)).getFood("Хищник");
+        List<String> result = List.of("Животные", "Птицы", "Рыба");
+        assertEquals(result, feline.eatMeat());
     }
     @Test
     public void getFamilyTest() {
@@ -28,12 +31,10 @@ public class FelineTest {
     }
     @Test
     public void getKittensNoConditionTest() {
-        feline.getKittens();
-        Mockito.verify(feline,Mockito.times(1)).getKittens(1);
+        assertEquals(1, feline.getKittens());
     }
     @Test
     public void getKittensWithConditionsTest() {
-        feline.getKittens(3);
-        Mockito.verify(feline,Mockito.times(1)).getKittens(3);
+        assertEquals(3, feline.getKittens(3));
     }
 }
